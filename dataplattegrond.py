@@ -1,6 +1,6 @@
 
 class path:
-    paths = []
+    paths = {}
 
     used = {
         'A':False,
@@ -71,15 +71,60 @@ class path:
         sidesraw = ''.join(path)
         sidesraw = sidesraw[1:-1]
         sides = [sidesraw[i:i+2] for i in range(0, len(sidesraw), 2)]
-        return sides
+        lengths = []
+        for side in sides:
+            lengths.append(self.lengths.get(side))
+        return lengths
+
+    def resetused(self):
+        self.used = {
+            'A':False,
+            'B':False,
+            'C':False,
+            'D':False,
+            'E':False,
+            'F':False,
+            'G':False,
+            'H':False,
+            'I':False,
+            'J':False
+        }
+
 
     def calcpath(self, Map, lengths, used,currentpath:list, end):
-        if currentpath.pop() == end:
-            lines = self.calclines(currentpath)
-            temppath = self.PathToEnd(currentpath, lin)
-            self.paths.append(self.PathToEnd())
+        temp_used = {
+        'A':False,
+        'B':False,
+        'C':False,
+        'D':False,
+        'E':False,
+        'F':False,
+        'G':False,
+        'H':False,
+        'I':False,
+        'J':False
+    }
+
+        currentnode = None if len(currentpath) == 0 else currentpath[len(currentpath)-1]
+        
+        for NODE in self.plattegrond:
+            if temp_used[NODE]:
+                adjacent = False
+                for point in self.plattegrond[NODE]:
+                    adjacent = point == currentnode
+                if not adjacent:
+                    temp_used.update({NODE:False})
+
+        if currentpath[len(currentpath)-1] == end:
+            temppath = self.PathToEnd(currentpath, self.calclengths(currentpath))
+            self.paths.update(currentpath, temppath.getTotalLength)
+
+        for node in self.plattegrond[currentnode]:
+            if not used[node]:
+                pass
 
 
     def calculate(self, Map, start, end):
         startpath = [start]
-        self.calcpath(Map, self.lengths, self.used, startpath, end)
+        self.calcpath(path, Map, self.lengths, self.used, startpath, end)
+path.calculate(path,Map=path.plattegrond, start='A',end="B")
