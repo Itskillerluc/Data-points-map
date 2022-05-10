@@ -120,8 +120,8 @@ class path:
             self.paths.update(currentpath, temppath.getTotalLength)
 
         for node in self.plattegrond[currentnode]:
-            if not used[node]:
-                pass
+            if not used[node] and not temp_used[node]:
+                self.calcpath(path, self.lengths, self.used, currentpath+node, end)
 
 
     def calculate(self, Map, start, end):
