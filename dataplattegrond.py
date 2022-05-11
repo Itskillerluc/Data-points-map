@@ -242,8 +242,20 @@ sheet_obj = wb_obj.active
 initialcode = sheet_obj.cell(row=2, column=3)
 data = []
 #TODO: aan menno vragen waar ik moet beginnen
-for row in range(2, sheet_obj.max_row):
+for row in range(10, sheet_obj.max_row):
     rowdata = [sheet_obj.cell(row=row, column=i).value for i in range(1, sheet_obj.max_column)]
     data.append(rowdata)
+datafiltered = []
+for entry in data:
+    datafiltered.append(entry[0])
+    datafiltered.append(entry[1])
+    datafiltered.append(entry[2])
+    datafiltered.append(entry[4])
+
+prev=None
+for Product_ in datafiltered:
+    current = None
+    while current == prev and prev or current !=  None:
+        print (2)
 
 draw.main()
