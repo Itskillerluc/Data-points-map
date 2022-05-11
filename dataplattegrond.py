@@ -227,4 +227,23 @@ class draw:
         
         draw.MainLoop()
         
+class Product:
+    def __init__(self, Datum, Locatie, Batch_code, Aantal) -> None:
+        self.Datum = Datum
+        self.Locatie = Locatie
+        self.Batch_code = Batch_code
+        self.Aantal = Aantal
+    def getDatum(self):
+        return self.Datum
+
+path = r"D:\Users\Dennis\Documents\Luc\python 3\Data-points-map\data.xlsx"
+wb_obj = exel.load_workbook(path)
+sheet_obj = wb_obj.active
+initialcode = sheet_obj.cell(row=2, column=3)
+data = []
+#TODO: aan menno vragen waar ik moet beginnen
+for row in range(2, sheet_obj.max_row):
+    rowdata = [sheet_obj.cell(row=row, column=i).value for i in range(1, sheet_obj.max_column)]
+    data.append(rowdata)
+
 draw.main()
