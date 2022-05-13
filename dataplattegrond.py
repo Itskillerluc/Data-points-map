@@ -161,12 +161,20 @@ class draw:
         p = f.gca()
         colors = ['red','red','lime','lime','lime','lime','lime','lime','yellow','yellow','orange','cyan','cyan']
         alllines = ['AP', 'PB', 'BH', 'HK', 'KN', 'NM', 'ML', 'LC', 'DH', 'EH', 'EF', 'FQ', 'QG']
-        calcamount = lambda line1, line2: ((Linesdirect.count(line1)/50).__round__())+((Linesdirect.count(line2)/50).__round__())
+        calcamount = lambda line1, line2: (Linesdirect.count(line1))+(Linesdirect.count(line2))
         llllines = [[['A','P'],['P','A']],[['P','B'],['B','P']],[['B','H'],['H','B']],[['H','K'],['K','H']],[['K','N'],['N','K']],[['N','M'],['M','N']],[['M','L'],['L','M']],[['L','C'],['C','L']],[['D','H'],['H','D']],[['E','H'],['H','E']],[['E','F'],['F','E']],[['F','Q'],['Q','F']],[['Q','G'],['G','Q']]]
         lineamounts = [calcamount(x[0], x[1]) for x in llllines]
         p.bar(alllines, lineamounts, color = colors)
         canvas.draw()
         draw.sixth()
+
+    def seven():
+        ws6 = tk.Toplevel()
+        ws6.title("Legend")
+        text = tk.Label(ws6,text='Lime Nodes = POI/Location\nBlack Nodes = Measuring Nodes (this is for measuring the data)\nBlue Nodes = Path Nodes (these are to make it follow a path)\nA = Truck unloading\nB = Cooling storage\nC = Production soft fried\nD = Finished products\nE = Wrapping\nF = Cooling storage\nG = Truck loading', justify="left")
+        text.pack(anchor='w')
+        draw.MainLoop()
+        
 
     def sixth():
         ws5 = tk.Toplevel()
@@ -176,13 +184,13 @@ class draw:
         canvas.get_tk_widget().grid(row=1, column=3, rowspan=6)
         p = f.gca()
         alllines = ['AP', 'PH', 'HI', 'BI', 'HK', 'KN', 'MN', 'LM', 'LC', 'DH', 'EH', 'JF','JI', 'PQ', 'QG']
-        calcamount = lambda line1, line2: ((Liness.count(line1)/50).__round__())+((Liness.count(line2)/50).__round__())
+        calcamount = lambda line1, line2: (Liness.count(line1))+(Liness.count(line2))
         llllines = [[['A','P'],['P','A']],[['P','H'],['H','P']],[['H','I'],['I','H']],[['B','I'],['I','B']],[['H','K'],['K','H']],[['K','N'],['N','K']],[['N','M'],['M','N']],[['M','L'],['L','M']],[['L','C'],['C','L']],[['D','H'],['H','D']],[['E','H'],['H','E']],[['J','F'],['F','J']],[['J','I'],['I','J']],[['P','Q'],['Q','P']],[['Q','G'],['G','Q']]]
         lineamounts = [calcamount(x[0], x[1]) for x in llllines]
         collors = ['red','magenta','purple','green','lime','lime','lime','lime','lime','yellow','orange','gray','black','cyan','cyan']
         p.bar(alllines, lineamounts, color = collors)
         canvas.draw()
-        draw.MainLoop()
+        draw.seven()
 
     def second():
         ws = tk.Toplevel()
