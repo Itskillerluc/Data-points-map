@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkinter.ttk as ttk
 import openpyxl as exel
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
@@ -173,7 +174,7 @@ class draw:
         ws6.title("Legend")
         text = tk.Label(ws6,text='Lime Nodes = POI/Location\nBlack Nodes = Measuring Nodes (this is for measuring the data)\nBlue Nodes = Path Nodes (these are to make it follow a path)\nA = Truck unloading\nB = Cooling storage\nC = Production soft fried\nD = Finished products\nE = Wrapping\nF = Cooling storage\nG = Truck loading', justify="left")
         text.pack(anchor='w')
-        draw.MainLoop()
+        draw.eight()
         
 
     def sixth():
@@ -191,6 +192,36 @@ class draw:
         p.bar(alllines, lineamounts, color = collors)
         canvas.draw()
         draw.seven()
+
+    def eight():
+        ws7 = tk.Toplevel()
+        ws7.title("Data")
+        tabControl = ttk.Notebook(ws7)
+        calcamount = lambda line1, line2: (Liness.count(line1))+(Liness.count(line2))
+        llllines = [[['A','P'],['P','A']],[['P','H'],['H','P']],[['H','I'],['I','H']],[['B','I'],['I','B']],[['H','K'],['K','H']],[['K','N'],['N','K']],[['N','M'],['M','N']],[['M','L'],['L','M']],[['L','C'],['C','L']],[['D','H'],['H','D']],[['E','H'],['H','E']],[['J','F'],['F','J']],[['J','I'],['I','J']],[['P','Q'],['Q','P']],[['Q','G'],['G','Q']]]
+        lineamounts = str(dict(zip(['AP', 'PH', 'HI', 'BI', 'HK', 'KN', 'MN', 'LM', 'LC', 'DH', 'EH', 'JF','JI', 'PQ', 'QG'],[calcamount(x[0], x[1]) for x in llllines]))).replace("'", '').replace(",", '\n').replace('{',' ').strip('}')
+        lines = tk.Label(tabControl, text=lineamounts, justify='left',anchor='w')
+        tabControl.add(lines, text='Nodes Path Layout')
+
+        nodeamounts = str(dict(zip(letter,frequency))).replace("'", '').replace(",", '\n').replace('{',' ').strip('}')
+        nodesundirect = tk.Label(tabControl, text=nodeamounts, justify='left',anchor='w')
+
+        calcamount2 = lambda line1, line2: (Linesdirect.count(line1))+(Linesdirect.count(line2))
+        ln = [[['A','P'],['P','A']],[['P','B'],['B','P']],[['B','H'],['H','B']],[['H','K'],['K','H']],[['K','N'],['N','K']],[['N','M'],['M','N']],[['M','L'],['L','M']],[['L','C'],['C','L']],[['D','H'],['H','D']],[['E','H'],['H','E']],[['E','F'],['F','E']],[['F','Q'],['Q','F']],[['Q','G'],['G','Q']]]
+        lineamounts2 = str(dict(zip(['AP', 'PB', 'BH', 'HK', 'KN', 'NM', 'ML', 'LC', 'DH', 'EH', 'EF', 'FQ', 'QG'],[calcamount2(x[0], x[1]) for x in ln]))).replace("'", '').replace(",", '\n').replace('{',' ').strip('}')
+        linesdirect = tk.Label(tabControl, text=lineamounts2, justify='left',anchor='w')
+        
+
+        nodeamounts2 = str(dict(zip(letter2,frequency2))).replace("'", '').replace(",", '\n').replace('{',' ').strip('}')
+        nodesdirect = tk.Label(tabControl, text=nodeamounts2, justify='left',anchor='w')
+
+        tabControl.add(nodesdirect, text='Nodes Path Layout')
+        tabControl.add(linesdirect, text='Lines Path Layout')
+        tabControl.add(nodesundirect, text='Nodes Path Use Quantity')
+        tabControl.add(lines, text='Lines Path Use Quantity')
+
+        tabControl.pack(expand = 1, fill ="both")
+        draw.MainLoop()
 
     def second():
         ws = tk.Toplevel()
