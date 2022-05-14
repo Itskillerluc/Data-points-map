@@ -82,7 +82,7 @@ class draw:
         canvas = tk.Canvas(root, width=1290, height=857)
         canvas.pack()
         circle = lambda x, y, color: canvas.create_oval(20+x, 20+y, 30+x, 30+y, fill=color)
-        bg = tk.PhotoImage(file = r"Background.gif")
+        bg = tk.PhotoImage(file = "Background.gif")
         canvas.create_image(0, 0,image=bg, anchor=tk.NW)
 
         line = lambda point1, point2, line, line2, color: canvas.create_line(nodes[point1][0]+25, nodes[point1][1]+25, nodes[point2][0]+25, nodes[point2][1]+25, fill=color,width=((Linesdirect.count(line)/50).__round__())+((Linesdirect.count(line2)/50).__round__()))
@@ -229,7 +229,7 @@ class draw:
         canvas = tk.Canvas(ws, width=1290, height=857)
         canvas.pack()
         circle2 = lambda x, y, color: canvas.create_oval(20+x, 20+y, 30+x, 30+y, fill=color)
-        bg2 = tk.PhotoImage(file = r"D:\Users\Dennis\Documents\Luc\python 3\Data-points-map\Layout FP plant (1).gif")
+        bg2 = tk.PhotoImage(file = "Background.gif")
         canvas.create_image(0, 0,image=bg2, anchor=tk.NW)
         line = lambda point1, point2, line, line2, color: canvas.create_line(nodes[point1][0]+25, nodes[point1][1]+25, nodes[point2][0]+25, nodes[point2][1]+25, fill=color,width=((Liness.count(line)/50).__round__())+((Liness.count(line2)/50).__round__()))
 
@@ -285,7 +285,7 @@ class draw:
 
         draw.third()
 
-path = r"D:\Users\Dennis\Documents\Luc\python 3\Data-points-map\data.xlsx"
+path = "data.xlsx"
 wb_obj = exel.load_workbook(path)
 sheet_obj = wb_obj.active
 initialcode = sheet_obj.cell(row=2, column=3)
